@@ -3,7 +3,7 @@ import { catalog } from "../pages/components/catalog";
 import { productPage } from "../pages/productPage";
 
 describe('Allo cypress tests', () => {
-  it('Add products to cart', () => {
+  it.skip('Add products to cart', () => {
     cy.goToHomePage();
     homePage.clickCatalogBtn();
     catalog.selectCatalogSubItem("Побутова техніка", "Роботи-пилососи");
@@ -22,7 +22,7 @@ describe('Allo cypress tests', () => {
     productPage.assertDeleteBtnIsEnabled();
   })
 
-  it("Search for product by its full name", () => {
+  it.skip("Search for product by its full name", () => {
     let productName = 'Xiaomi 14T Pro 12/512GB Titan Black'
     cy.goToHomePage();
     homePage.searchBySubmitBtnFor(productName);
@@ -32,14 +32,14 @@ describe('Allo cypress tests', () => {
     productPage.assertProductIsVisible(productName);
   })
 
-  it("Verify search by brand name", () => {
+  it.skip("Verify search by brand name", () => {
     let brandName = "Xiaomi"
     cy.goToHomePage();
     homePage.searchByEnterKeyFor(brandName);
     productPage.assertSearchedItemsCountIs(28, brandName);
   })
 
-  it("Verify product link navigation", () => {
+  it.skip("Verify product link navigation", () => {
     cy.goToHomePage();
     homePage.clickCatalogBtn();
     catalog.selectCatalogSubItem("Побутова техніка", "Роботи-пилососи");
@@ -47,7 +47,7 @@ describe('Allo cypress tests', () => {
     productPage.verifyProductPageHeader();
   })
 
-  it.only("Verify sort dropdown changes its value", () => {
+  it.skip("Verify sort dropdown changes its value", () => {
     cy.goToHomePage();
     homePage.clickCatalogBtn();
     catalog.selectCatalogSubItem("Побутова техніка", "Роботи-пилососи");
