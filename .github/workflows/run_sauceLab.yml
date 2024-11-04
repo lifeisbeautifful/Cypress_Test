@@ -11,5 +11,7 @@ jobs:
       # Install npm dependencies, cache them correctly
       # and run all Cypress tests
       - name: Cypress run
-        #uses: cypress-io/github-action@v6
-      - run: npm run sauceLab
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm run sauceLab
