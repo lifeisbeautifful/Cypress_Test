@@ -1,14 +1,13 @@
 import { defineConfig } from "cypress";
 
 export default defineConfig({
-  setupNodeEvents(on, config) {
-    return require('./cypress/plugins/index.js')(on, config)
-  },
+  reporter: "cypress-mochawesome-reporter",
   e2e: {
     baseUrl: "https://allo.ua",
     viewportHeight: 816,
     viewportWidth: 1500,
     setupNodeEvents(on, config) {
+      require("cypress-mochawesome-reporter/plugin") (on);
       // implement node event listeners here
     },
     env: {
