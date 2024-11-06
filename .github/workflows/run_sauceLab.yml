@@ -16,8 +16,8 @@ jobs:
         containers: [0,1]
         
     steps:
-     # - name: Checkout
-      #  uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       - uses: cypress-io/github-action@v6
         with:
           start: npm run sauceLab
