@@ -7,6 +7,6 @@ describe("Test session storage", () => {
     })
 
     it("Test for CI", () => {
-        cy.sauceLogin("standard_user", "secret_sauce");
+        cy.visit("https://www.saucedemo.com/");
     })
 })
