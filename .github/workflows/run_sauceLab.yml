@@ -24,7 +24,6 @@ jobs:
         uses: actions/checkout@v4
       - uses: cypress-io/github-action@v6
         with:
-          parallel: true
           start: npm run sauceLab
 
       - name: Upload artifacts
