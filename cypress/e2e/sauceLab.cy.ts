@@ -7,6 +7,6 @@ describe("Test session storage", () => {
     })
 
     it("Test for CI", () => {
-        cy.visit("https://www.saucedemo.com/");
+        cy.visit("https://allo.ua/");
     })
 })
