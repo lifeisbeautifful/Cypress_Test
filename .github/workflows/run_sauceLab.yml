@@ -21,3 +21,10 @@ jobs:
       - uses: cypress-io/github-action@v6
         with:
           start: npm run sauceLab
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3.1.1
+        if: always()
+        with:
+          name: Reports data
+          path: cypress\reports
