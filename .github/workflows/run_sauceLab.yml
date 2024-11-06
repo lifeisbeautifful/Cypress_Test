@@ -13,16 +13,18 @@ jobs:
       # if some of matrix job failes, other will continue to run, if we set true, all matrix jobs will be canceled if one of them failed.
       fail-fast: false
       matrix:
-        project: [chromium]
-        shardIndex: [1, 2]
-        shardTotal: [2]
-        os: [ubuntu-latest]
+        containers: [1, 2]
+        #project: [chromium]
+        #shardIndex: [1, 2]
+        #shardTotal: [2]
+        #os: [ubuntu-latest]
         
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - uses: cypress-io/github-action@v6
         with:
+          parallel: true
           start: npm run sauceLab
 
       - name: Upload artifacts
