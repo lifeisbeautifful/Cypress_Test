@@ -6,20 +6,42 @@ on:
   workflow_dispatch:
     
 jobs:
-  cypress-run:
+  build:
     runs-on: ubuntu-latest
+    
     strategy:
       # if some of matrix job failes, other will continue to run, if we set true, all matrix jobs will be canceled if one of them failed.
       fail-fast: false
       matrix:
-        project: [chromium]
-        os: [ubuntu-latest, windows-latest]
+        node-versions: [8.x]
+        ci_node_total: [2]
+        ci_node_index: [0, 1]
+        
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
+        
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          start: npm run sauceLab
+          node-version: ${{ matrix.node-version }}
+          
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build --if-present
+          
+      - name: Run http server with the app in the background
+        run: |
+          npm run start:ci &
+
+      - name: Run tests with knapsack pro
+        env:
+          KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_CYPRESS }}
+          KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
+          KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
+        run: |
+          $(npm bin)/knapsack-pro-cypress
+        #uses: cypress-io/github-action@v6
+        #with:
+          #start: npm run sauceLab
