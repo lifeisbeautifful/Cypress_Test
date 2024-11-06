@@ -13,7 +13,10 @@ jobs:
       # if some of matrix job failes, other will continue to run, if we set true, all matrix jobs will be canceled if one of them failed.
       fail-fast: false
       matrix:
-        containers: [0,1]
+        project: [chromium]
+        shardIndex: [1, 2]
+        shardTotal: [2]
+        os: [ubuntu-latest]
         
     steps:
       - name: Checkout
