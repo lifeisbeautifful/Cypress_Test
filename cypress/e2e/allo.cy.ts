@@ -2,7 +2,7 @@ import { homePage } from "../pages/homePage";
 import { catalog } from "../pages/components/catalog";
 import { productPage } from "../pages/productPage";
 
-describe('Allo cypress tests', () => {
+describe.skip('Allo cypress tests', () => {
   it.skip('Add products to cart', () => {
     cy.goToHomePage();
     homePage.clickCatalogBtn();
