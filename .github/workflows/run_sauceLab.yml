@@ -21,7 +21,7 @@ jobs:
         
       - name: Install packages
         run: npm install
-      - run: npm run sauceLab
+      - run: npx cypress run
           
      
         #uses: cypress-io/github-action@v6
