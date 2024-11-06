@@ -26,6 +26,6 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: Reports-data
+          name: Reports-data-${{ matrix.container }}
           path: cypress/reports/html
           retention-days: 30
