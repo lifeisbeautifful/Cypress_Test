@@ -2,21 +2,33 @@ name: Cypress Tests
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   workflow_dispatch:
     
 jobs:
-  cypress-run:
+  cypress-test:
     runs-on: ubuntu-latest
+    
     strategy:
       # if some of matrix job failes, other will continue to run, if we set true, all matrix jobs will be canceled if one of them failed.
       fail-fast: false
+      matrix:
+        project: [chromium]
+        shardIndex: [1, 2]
+        shardTotal: [2]
+        os: [ubuntu-latest]
+        
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
+      - uses: cypress-io/github-action@v6
         with:
           start: npm run sauceLab
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Reports-${{ matrix.shardIndex }}
+          path: cypress/reports/html
+          retention-days: 30
