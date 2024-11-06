@@ -19,11 +19,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         
-      - name: Install packages
-        run: npm install
-      - run: npx cypress run
+     # - name: Install packages
+      #  run: npm install
+     # - run: npx cypress run --spec $(node cypress-parallel.ts)
           
      
-        #uses: cypress-io/github-action@v6
-        #with:
-          #start: npm run sauceLab
+      - uses: cypress-io/github-action@v6
+        with:
+          start: npm run sauceLab
